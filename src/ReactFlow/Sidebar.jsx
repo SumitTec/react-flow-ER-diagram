@@ -48,25 +48,13 @@ export default () => {
           <div className="SUbmenu-list">
             <ul>
               <li>
-                <div className="dndnodes" onClick={subtoggle}>
-                  ER Node
-                  {issub && (
-                    <div className="SUbmenu-lists">
-                      <ul>
-                        <li>
-                          <div
-                            className="text-xs w-16 ml-5"
-                            onDragStart={(event) =>
-                              onDragStart(event, "ernode")
-                            }
-                            draggable
-                          >
-                            Default
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  )}
+                <div
+                  className="dndnodes"
+                  onClick={toggleShow}
+                  onDragStart={(event) => onDragStart(event, "ernode")}
+                  draggable
+                >
+                  Default ER Node
                 </div>
               </li>
               {/* <li>
