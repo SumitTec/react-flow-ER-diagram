@@ -48,16 +48,28 @@ export default () => {
           <div className="SUbmenu-list">
             <ul>
               <li>
-                <div
-                  className="dndnodes"
-                  onDragStart={(event) => onDragStart(event, "ernode")}
-                  draggable
-                  onClick={handleItemClick}
-                >
+                <div className="dndnodes" onClick={subtoggle}>
                   ER Node
+                  {issub && (
+                    <div className="SUbmenu-lists">
+                      <ul>
+                        <li>
+                          <div
+                            className="text-xs w-16 ml-5"
+                            onDragStart={(event) =>
+                              onDragStart(event, "ernode")
+                            }
+                            draggable
+                          >
+                            Default
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </li>
-              <li>
+              {/* <li>
                 <div
                   onClick={subtoggle}
                   className={`dndnodes input ${issub ? "arrows" : ""}`}
@@ -81,15 +93,8 @@ export default () => {
                     </div>
                   )}
                 </div>
-              </li>
-              <li>
-                {/* <div
-                  className="dndnodes outputs"
-                  onDragStart={(event) => onDragStart(event, "outputs")}
-                  draggable
-                >
-                  Output Node
-                </div> */}
+              </li> */}
+              {/* <li>
 
                 <div
                   onClick={outputtoggle}
@@ -114,8 +119,8 @@ export default () => {
                     </div>
                   )}
                 </div>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <div
                   className="dndnodes"
                   onDragStart={(event) => onDragStart(event, "default")}
@@ -124,8 +129,8 @@ export default () => {
                 >
                   Default Node
                 </div>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <div
                   className="dndnodes"
                   onDragStart={(event) => onDragStart(event, "custom")}
@@ -134,8 +139,8 @@ export default () => {
                 >
                   Custom
                 </div>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <div
                   className="dndnodes"
                   onDragStart={(event) => onDragStart(event, "number")}
@@ -144,12 +149,12 @@ export default () => {
                 >
                   Number
                 </div>
-              </li>
+              </li> */}
             </ul>
           </div>
         )}
       </div>
-     {/* <div
+      {/* <div
         onClick={newtoggelshow}
         className={`dndnode inputs ${isnewshow ? "arrow" : ""}`}
         draggable
