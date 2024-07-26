@@ -1,0 +1,276 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body,
+html,
+#root {
+  height: 100%;
+}
+aside {
+  background-color: #0c1e35;
+}
+.description {
+  color: #ddd;
+}
+.dndflow {
+  flex-direction: column;
+  display: flex;
+  flex-grow: 1;
+  height: 100%;
+}
+
+.dndflow aside {
+  border-right: 1px solid #eee;
+  padding: 15px 10px;
+  font-size: 12px;
+}
+
+.dndflow aside .description {
+  margin-bottom: 10px;
+}
+
+.dndflow .dndnode,
+.ernode {
+  position: relative;
+  height: auto;
+  padding: 4px;
+  border: 0px solid #1a192b;
+  color: #7d84ab;
+  border-radius: 2px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  align-items: center;
+  cursor: grab;
+  font-family: sans-serif;
+}
+
+.dndnodes,
+.ernode {
+  font-size: 14px;
+  margin-bottom: 10px;
+  margin-left: 4px;
+  color: #7d84ab;
+}
+.dndnodes:hover {
+  color: #dddddd;
+}
+.SUbmenu-list,
+.SUbmenu-lists {
+  transform: translateX(-20px) translateY(5px);
+  width: 150px;
+  padding-left: 20px;
+  border-radius: 10px;
+  height: 0px;
+  overflow: hidden;
+  visibility: hidden;
+  transition: 0.9s ease-in-out;
+}
+.SUbmenu-list li a,
+.SUbmenu-lists li a {
+  -webkit-transition: all 9s;
+  transition: all 9s;
+}
+
+.dndnode .SUbmenu-list {
+  height: auto;
+  visibility: visible;
+}
+.dndnodes .SUbmenu-lists {
+  height: auto;
+  visibility: visible;
+}
+/* 
+.dndflow .dndnode.inputs {
+  border-color: #1feb29;
+}
+
+.dndflow .dndnode.outputs {
+  border-color: #ff0072;
+}
+
+.dndflow .dndnode.custom {
+  border-color: #c709ae;
+}
+
+.dndflow .dndnode.number {
+  border-color: #132890;
+} */
+
+.dndflow .reactflow-wrapper {
+  flex-grow: 1;
+  height: 100%;
+}
+
+.dndflow .selectall {
+  margin-top: 10px;
+  font-family: sans-serif;
+  font-size: 12px;
+}
+.arrow,
+.arrows {
+  color: #ffffff !important;
+}
+.dndnode::after {
+  position: absolute;
+  content: "";
+  transition: transform 0.3s;
+  border-right: 2px solid currentcolor;
+  border-bottom: 2px solid currentcolor;
+  width: 5px;
+  height: 5px;
+  right: 10px;
+  transform: rotate(-45deg);
+  top: 13px;
+}
+.dndnode.arrow:after {
+  transform: rotate(45deg);
+}
+.dndnodes {
+  position: relative;
+}
+.dndnodes::after {
+  position: absolute;
+  content: "";
+  transition: transform 0.3s;
+  border-right: 2px solid currentcolor;
+  border-bottom: 2px solid currentcolor;
+  width: 5px;
+  height: 5px;
+  right: 10px;
+  transform: rotate(-45deg);
+  top: 10px;
+}
+.arrows::after {
+  transform: rotate(45deg);
+}
+@media screen and (min-width: 768px) {
+  .dndflow {
+    flex-direction: row;
+  }
+
+  .dndflow aside {
+    width: 20%;
+    max-width: 200px;
+  }
+}
+
+.download-image.react-flow {
+  background: #1a365d;
+}
+.react-flow__node-elk {
+  background: #f8f8f8;
+  border-radius: 4px;
+}
+
+.react-flow__handle {
+  position: relative;
+  top: auto;
+  transform: none;
+  background: #224466;
+}
+.handles {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 10px;
+  height: 100%;
+  position: absolute;
+}
+
+/* .react-flow.touch-flow .react-flow__handle {
+  flex-direction: column;
+  justify-content: space-around;
+  width: 10px;
+  height: 100%;
+  position: absolute;
+  z-index: 11111;
+}
+
+.handles.sources {
+  right: -2px;
+  top: 0;
+}
+
+.handles.targets {
+  left: -1px;
+  bottom: 0;
+} */
+
+.react-flow__node-elk {
+  background: #f8f8f8;
+  border-radius: 4px;
+}
+
+.react-flow__handle {
+  position: absolute; /* Ensure handles are absolutely positioned */
+  background: #224466;
+}
+
+.handles {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 10px;
+  height: auto;
+  position: absolute;
+}
+
+.handles.sources {
+  position: absolute;
+  right: -1px;
+  height: 105%;
+  top: -3.3%;
+}
+
+.handles.targets {
+  position: absolute;
+  left: -1px;
+  top: -3.3%;
+  height: 105%;
+}
+
+.react-flow__edge-path {
+  stroke: #333;
+  stroke-width: 2;
+  z-index: 99999;
+}
+
+.temp .react-flow__edge-path {
+  stroke: #bbb;
+  stroke-dasharray: 5 5;
+}
+
+.react-flow__node-toolbar {
+  display: flex;
+  top: 14px;
+  left: 90px;
+  width: 65px;
+  background-image: linear-gradient(
+    -22deg,
+    #00a2ff 5%,
+    #06fdd8 0%,
+    #0760d5
+  ) !important;
+  padding: 5px 6px;
+  border-radius: 5px;
+  justify-content: space-between;
+  box-shadow: 2px 2px #307ee3;
+}
+.set-btn {
+  box-shadow: 2px 2px #00000024;
+}
+
+.sketch-picker {
+  width: 210px!important;
+  margin: 5px auto;
+}

@@ -1,0 +1,112 @@
+.App {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.App-header {
+  height: 50px;
+  line-height: 50px;
+  align-items: center;
+  text-align: center;
+  border-bottom: 0px solid #eee;
+  padding: 0 1rem;
+  color: #ddd;
+  background-color: #0c1e35;
+}
+
+.container {
+  margin: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 50px;
+}
+
+.rhombus-1 {
+  width: 75px;
+  height: 75px;
+  transform: rotate(45deg);
+  background-image: radial-gradient(circle, #ffd700 0%, #dfbe08 100%);
+}
+
+.rhombus-1 p {
+  transform: rotate(-45deg);
+  top: 40%;
+  left: 0%;
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  color: #ffffff;
+  font-size: 10px;
+}
+.decision-heigh {
+  height: 142px;
+}
+
+.btn-primary {
+  border-radius: 50px;
+  background-image: radial-gradient(circle, #5c0067 0%, #885df1 100%);
+  text-decoration: none;
+  color: #fff !important;
+  height: auto;
+  padding: 7px 15px;
+  font-size: 12px;
+  border: none;
+  border: 1px solid #885df1;
+  transition: background 200ms ease, border-color 200ms ease;
+}
+
+.parallelogram {
+  width: auto;
+  height: max-content;
+  padding: 15px;
+  font-size: 12px;
+  transform: skew(-30deg);
+  background-image: linear-gradient(90deg, #1e4c17, #2d792d);
+  color: #ffffff;
+}
+
+.rectangle {
+  height: max-content;
+  width: auto;
+  padding: 15px;
+  font-size: 12px;
+  color: #ffffff;
+  text-align: center;
+  background-image: radial-gradient(circle, #5c0067 0%, #00d4ff 100%);
+}
+
+.rhombus-1 p,
+.btn-primary,
+.parallelogram,
+.rectangle {
+  font-family: sans-serif;
+}
+
+.react-flow__node-decision > .react-flow__handle-right {
+  top: 27%;
+  right: -18px;
+}
+
+.react-flow__node-decision > .react-flow__handle-bottom {
+  left: 50%;
+  bottom: 47px;
+}
+
+.delay {
+  border-radius: 0px 50px 50px 0px;
+  background: linear-gradient(#e66465, #9198e5);
+  text-decoration: none;
+  color: #fff !important;
+  font-size: 12px;
+  height: auto;
+  padding: 10px 15px;
+  border: none;
+  border: 1px solid #9198e5;
+  transition: background 200ms ease, border-color 200ms ease;
+}
+
+.ReactModal__Overlay {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  z-index: 1000 !important;
+}
