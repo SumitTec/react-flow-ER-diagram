@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from "react";
+import React, { useState, Fragment } from "react";
 import { Handle, NodeToolbar, Position, useReactFlow } from "reactflow";
 import AddItemsModal from "./NoUseNodes/AddItemsModal";
 import { MdCheck, MdEdit, MdSettings } from "react-icons/md";
@@ -21,6 +21,22 @@ function ERNodes(node) {
 
     const sourceHandles = newItems.map((item) => ({ id: item.sourceHandles }));
     const targetHandles = newItems.map((item) => ({ id: item.targetHandles }));
+
+    function NodeWithToolbar({ data }) {
+      return (
+        <>
+          <NodeToolbar
+            isVisible={data.forceToolbarVisible || undefined}
+            position={data.toolbarPosition}
+          >
+            <button>cut</button>
+            <button>copy</button>
+            <button>paste</button>
+          </NodeToolbar>
+          <div className="react-flow__node-default">{data?.label}</div>
+        </>
+      );
+    }
     // Update the node data
     setNodes((nds) =>
       nds.map((n) =>
@@ -48,19 +64,6 @@ function ERNodes(node) {
 
   const handleTitleBlur = () => {
     setIsEditingTitle(false);
-    setNodes((nds) =>
-      nds.map((n) =>
-        n.id === node.id
-          ? {
-              ...n,
-              data: {
-                ...n.data,
-                label: title,
-              },
-            }
-          : n
-      )
-    );
   };
   const calculateHandlePosition = (index, total) => {
     const spacing = 1 / (total + 1);
@@ -70,21 +73,14 @@ function ERNodes(node) {
   const handleSetting = () => {
     setIsSettting(!isSettting);
   };
-  const nodes = getNodes();
-  useEffect(() => {
-    if (nodes.length > 0) {
-      const converted = JSON.stringify(nodes);
-      localStorage.setItem("Json", converted);
-    }
-  }, [nodes]);
-  console.log("Node", getNodes());
-  console.log("Nodes", node);
+  console.log("GetNodes->", getNodes());
   return (
     <Fragment>
       <div className="">
         {isSettting && (
           <NodeToolbar>
             <ColorPickerModel setBgColorNode={setBgColorNode} />
+
             <AddItemsModal
               items={items}
               setItems={setItems}

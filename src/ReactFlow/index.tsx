@@ -11,31 +11,11 @@ import "reactflow/dist/style.css";
 
 import DownloadButton from "./DownloadImage";
 import Sidebar from "./Sidebar";
-import Nodes from "./Nodes/Custom";
-import NumberNodes from "./Nodes/NumberNode";
-import OutputNode from "./Nodes/OutputNode";
-import DefaultNode from "./Nodes/DefaultNode";
-import InputNode from "./Nodes/InputNode";
-import StartEnd from "./Nodes/StartEnd";
-import InputOutput from "./Nodes/InputOutput";
-import Decision from "./Nodes/Decision";
-import Process from "./Nodes/Process";
-import Delay from "./Nodes/Delay";
 import ERNodes from "./Nodes/ERNode";
 
 // import "./index.css";
 const nodeTypes = {
-  custom: Nodes,
-  number: NumberNodes,
   ernode: ERNodes,
-  outputs: OutputNode,
-  defaults: DefaultNode,
-  inputs: InputNode,
-  startend: StartEnd,
-  inputoutput: InputOutput,
-  decision: Decision,
-  process: Process,
-  delay: Delay,
 };
 const initialNodes = [
   // {

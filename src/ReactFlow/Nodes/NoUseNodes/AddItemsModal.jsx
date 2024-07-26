@@ -45,6 +45,8 @@ const AddItemsModal = ({ items, setItems, node, title }) => {
   };
   const handleFinishItem = () => {
     const newItemsFinish = [...items, ...modalItems];
+
+    console.log("newItemsFinish", newItemsFinish);
     setItems(newItemsFinish);
     // Extract sourceHandles and targetHandles from items
     const sourceHandles = newItemsFinish.map((item) => ({
@@ -63,6 +65,7 @@ const AddItemsModal = ({ items, setItems, node, title }) => {
                 ...n.data,
                 sourceHandles,
                 targetHandles,
+                items: newItemsFinish,
               },
             }
           : n
@@ -101,7 +104,6 @@ const AddItemsModal = ({ items, setItems, node, title }) => {
         className="w-5 text-xs text-white bg-green-500 px-1 py-0.5 rounded mx-1 font-semibold set-btn"
       >
         <TiPlus />
-        
       </button>
       <Modal
         isOpen={modalIsOpen}
