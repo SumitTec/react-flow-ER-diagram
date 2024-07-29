@@ -8,7 +8,7 @@ import ReactFlow, {
   useReactFlow,
 } from "reactflow";
 import "reactflow/dist/style.css";
-
+import { initialNodes } from "./node-edges";
 import DownloadButton from "./DownloadImage";
 import Sidebar from "./Sidebar";
 import ERNodes from "./Nodes/ERNode";
@@ -17,21 +17,21 @@ import ERNodes from "./Nodes/ERNode";
 const nodeTypes = {
   ernode: ERNodes,
 };
-const initialNodes = [
-  // {
-  //   id: "1",
-  //   type: "default",
-  //   data: { label: "Default node" },
-  //   position: { x: 250, y: 5 },
-  // },
-];
+// const initialNodes = [
+//   // {
+//   //   id: "1",
+//   //   type: "default",
+//   //   data: { label: "Default node" },
+//   //   position: { x: 250, y: 5 },
+//   // },
+// ];
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
 
 const DnDFlow = () => {
   const reactFlowWrapper = useRef(null);
-  const [nodes, setNodes, onNodesChange] = useNodesState([]);
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const { screenToFlowPosition } = useReactFlow();
 
@@ -59,7 +59,7 @@ const DnDFlow = () => {
         x: event.clientX,
         y: event.clientY,
       });
-      const newNode = {
+      const newNode: any = {
         id: getId(),
         type,
         position,
