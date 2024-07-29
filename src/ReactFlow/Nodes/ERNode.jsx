@@ -2,12 +2,12 @@ import React, { useState, Fragment, useEffect } from "react";
 import { Handle, NodeToolbar, Position, useReactFlow } from "reactflow";
 import AddItemsModal from "./NoUseNodes/AddItemsModal";
 import { MdCheck, MdEdit, MdSettings } from "react-icons/md";
-import { IoIosCloseCircle } from "react-icons/io";
+import { IoIosCloseCircle, IoMdColorFill } from "react-icons/io";
 import { TiArrowRightThick } from "react-icons/ti";
 import ColorPickerModel from "./NoUseNodes/ColorPickerModel";
 
 function ERNodes(node) {
-  const { setNodes, getNodes } = useReactFlow(); // Get setNodes function from ReactFlow context
+  const { setNodes, getNodes, setEdges, getEdges } = useReactFlow(); // Get setNodes function from ReactFlow context
 
   const [items, setItems] = useState([]);
   const [title, setTitle] = useState("Enter Name");
@@ -52,17 +52,16 @@ function ERNodes(node) {
       nds.map((n) =>
         n.id === node.id
           ? {
-              ...n,
-              data: {
-                ...n.data,
-                label: title,
-              },
-            }
+            ...n,
+            data: {
+              ...n.data,
+              label: title,
+            },
+          }
           : n
       )
     );
   };
-
   const calculateHandlePosition = (index, total) => {
     const spacing = 1 / (total + 1);
     return (index + 1) * spacing;
@@ -71,36 +70,15 @@ function ERNodes(node) {
   const handleSetting = () => {
     setIsSettting(!isSettting);
   };
-<<<<<<< HEAD
-
-  useEffect(() => {
-    // Retrieve initial data from localStorage
-    const initialData = localStorage.getItem("Json");
-    console.log("Initial data from localStorage:", initialData); // Debug log
-    if (initialData) {
-      const parsedData = JSON.parse(initialData);
-      console.log("Parsed initial data:", parsedData); // Debug log
-      setNodes(parsedData);
-    }
-  }, [setNodes]);
-
   const nodes = getNodes();
-  console.log("Current nodes:", nodes); // Debug log
-
   useEffect(() => {
-    if (nodes && nodes.length > 0) {
-      console.log("Nodes to be saved:", nodes); // Debug log
+    if (nodes.length > 0) {
       const converted = JSON.stringify(nodes);
       localStorage.setItem("Json", converted);
     }
   }, [nodes]);
-
   console.log("Node", getNodes());
   console.log("Nodes", node);
-
-=======
-  // console.log("GetNodes->", getNodes());
->>>>>>> 0aef6faf9acd5ae581058788a67daebc4f6f23d7
   return (
     <Fragment>
       <div className="">
@@ -129,7 +107,7 @@ function ERNodes(node) {
                     defaultValue={"Enter name"}
                     onChange={handleTitleChange}
                     onBlur={handleTitleBlur}
-                    className="w-full text-black p-1 rounded h-3 outline-none"
+                    className="w-full  text-black p-1 rounded h-3 outline-none"
                     autoFocus
                   />
                 ) : (
@@ -184,7 +162,7 @@ function ERNodes(node) {
                   );
                 })}
               </div>
-              {node.data?.items?.map((item) => (
+              {items.map((item) => (
                 <div
                   key={item.id}
                   className="text-white px-2 text-xs flex justify-between"
