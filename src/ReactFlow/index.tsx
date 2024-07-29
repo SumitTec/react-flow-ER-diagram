@@ -6,6 +6,7 @@ import ReactFlow, {
   useEdgesState,
   Controls,
   useReactFlow,
+  Node,
 } from "reactflow";
 import "reactflow/dist/style.css";
 import { initialNodes } from "./node-edges";
@@ -13,7 +14,6 @@ import DownloadButton from "./DownloadImage";
 import Sidebar from "./Sidebar";
 import ERNodes from "./Nodes/ERNode";
 
-// import "./index.css";
 const nodeTypes = {
   ernode: ERNodes,
 };
@@ -70,11 +70,14 @@ const DnDFlow = () => {
     },
     [screenToFlowPosition]
   );
-  // console.log("Nodes", nodes);/
+
+  const addNode = (newNode: ConcatArray<Node<any, string | undefined>>) => {
+    setNodes((nds) => nds.concat(newNode));
+  };
 
   return (
     <div className="dndflow">
-      <Sidebar />
+      <Sidebar addNode={addNode} />
       <div className="reactflow-wrapper" ref={reactFlowWrapper}>
         <ReactFlow
           nodes={nodes}
