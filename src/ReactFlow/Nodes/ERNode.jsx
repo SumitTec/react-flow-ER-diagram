@@ -18,7 +18,6 @@ function ERNodes(node) {
   const handleRemoveItem = (id) => {
     const newItems = items.filter((item) => item.id !== id);
     setItems(newItems);
-
     const sourceHandles = newItems.map((item) => ({ id: item.sourceHandles }));
     const targetHandles = newItems.map((item) => ({ id: item.targetHandles }));
     // Update the node data
@@ -80,6 +79,7 @@ function ERNodes(node) {
   console.log("Node", getNodes());
   console.log("Nodes", node);
   return (
+
     <Fragment>
       <div className="">
         {isSettting && (
@@ -103,7 +103,7 @@ function ERNodes(node) {
                 {isEditingTitle ? (
                   <input
                     type="text"
-                    value={title}
+                    // value={title}
                     defaultValue={"Enter name"}
                     onChange={handleTitleChange}
                     onBlur={handleTitleBlur}
