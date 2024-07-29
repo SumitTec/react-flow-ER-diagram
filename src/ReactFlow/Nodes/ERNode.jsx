@@ -42,13 +42,13 @@ function ERNodes(node) {
       nds.map((n) =>
         n.id === node.id
           ? {
-              ...n,
-              data: {
-                ...n.data,
-                sourceHandles,
-                targetHandles,
-              },
-            }
+            ...n,
+            data: {
+              ...n.data,
+              sourceHandles,
+              targetHandles,
+            },
+          }
           : n
       )
     );
@@ -73,7 +73,7 @@ function ERNodes(node) {
   const handleSetting = () => {
     setIsSettting(!isSettting);
   };
-  console.log("GetNodes->", getNodes());
+  // console.log("GetNodes->", getNodes());
   return (
     <Fragment>
       <div className="">
@@ -150,9 +150,8 @@ function ERNodes(node) {
                       type="target"
                       style={{
                         background: "#555",
-                        top: `${
-                          calculateHandlePosition(index, items.length) * 100
-                        }%`,
+                        top: `${calculateHandlePosition(index, items.length) * 100
+                          }%`,
                       }}
                       position={Position.Left}
                     />
@@ -189,9 +188,8 @@ function ERNodes(node) {
                     position={Position.Right}
                     style={{
                       background: "#555",
-                      top: `${
-                        calculateHandlePosition(index, items.length) * 100
-                      }%`,
+                      top: `${calculateHandlePosition(index, items.length) * 100
+                        }%`,
                     }}
                   />
                 ))}

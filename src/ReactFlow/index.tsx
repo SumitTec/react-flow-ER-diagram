@@ -6,6 +6,7 @@ import ReactFlow, {
   useEdgesState,
   Controls,
   useReactFlow,
+  Node,
 } from "reactflow";
 import "reactflow/dist/style.css";
 
@@ -23,7 +24,6 @@ import Process from "./Nodes/Process";
 import Delay from "./Nodes/Delay";
 import ERNodes from "./Nodes/ERNode";
 
-// import "./index.css";
 const nodeTypes = {
   custom: Nodes,
   number: NumberNodes,
@@ -37,17 +37,6 @@ const nodeTypes = {
   process: Process,
   delay: Delay,
 };
-const initialNodes = [
-  // {
-  //   id: "1",
-  //   type: "default",
-  //   data: { label: "Default node" },
-  //   position: { x: 250, y: 5 },
-  // },
-];
-
-let id = 0;
-const getId = () => `dndnode_${id++}`;
 
 const DnDFlow = () => {
   const reactFlowWrapper = useRef(null);
@@ -80,7 +69,7 @@ const DnDFlow = () => {
         y: event.clientY,
       });
       const newNode = {
-        id: getId(),
+        id: `dndnode_${Date.now()}`,
         type,
         position,
         data: { label: `${type} node` },
@@ -90,11 +79,14 @@ const DnDFlow = () => {
     },
     [screenToFlowPosition]
   );
-  // console.log("Nodes", nodes);/
+
+  const addNode = (newNode: ConcatArray<Node<any, string | undefined>>) => {
+    setNodes((nds) => nds.concat(newNode));
+  };
 
   return (
     <div className="dndflow">
-      <Sidebar />
+      <Sidebar addNode={addNode} />
       <div className="reactflow-wrapper" ref={reactFlowWrapper}>
         <ReactFlow
           nodes={nodes}
