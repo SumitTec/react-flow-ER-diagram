@@ -8,11 +8,11 @@ import ColorPickerModel from "./NoUseNodes/ColorPickerModel";
 
 function ERNodes({ id, data }) {
   const { setNodes, getNodes } = useReactFlow();
-  const [items, setItems] = useState(data.items || []);
-  const [title, setTitle] = useState(data.label || "Enter Name");
+  const [items, setItems] = useState(data?.items || []);
+  const [title, setTitle] = useState(data?.label || "Enter Name");
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [isSettting, setIsSettting] = useState(false);
-  const [bgColorNode, setBgColorNode] = useState(data.bgColor || "");
+  const [bgColorNode, setBgColorNode] = useState(data?.bgColor || "");
 
   const handleRemoveItem = (itemId) => {
     const newItems = items.filter((item) => item.id !== itemId);
@@ -34,14 +34,14 @@ function ERNodes({ id, data }) {
       nds.map((n) =>
         n.id === id
           ? {
-            ...n,
-            data: {
-              ...n.data,
-              sourceHandles,
-              targetHandles,
-              items: newItems,
-            },
-          }
+              ...n,
+              data: {
+                ...n.data,
+                sourceHandles,
+                targetHandles,
+                items: newItems,
+              },
+            }
           : n
       )
     );
@@ -61,12 +61,12 @@ function ERNodes({ id, data }) {
       nds.map((n) =>
         n.id === id
           ? {
-            ...n,
-            data: {
-              ...n.data,
-              label: title,
-            },
-          }
+              ...n,
+              data: {
+                ...n.data,
+                label: title,
+              },
+            }
           : n
       )
     );
@@ -81,22 +81,22 @@ function ERNodes({ id, data }) {
     setIsSettting(!isSettting);
   };
 
-  useEffect(() => {
-    // Retrieve initial data from localStorage
-    const initialData = localStorage.getItem("Json");
-    if (initialData) {
-      const parsedData = JSON.parse(initialData);
-      setNodes(parsedData);
-    }
-  }, [setNodes]);
+  // useEffect(() => {
+  //   // Retrieve initial data from localStorage
+  //   const initialData = localStorage.getItem("Json");
+  //   if (initialData) {
+  //     const parsedData = JSON.parse(initialData);
+  //     setNodes(parsedData);
+  //   }
+  // }, [setNodes]);
 
-  useEffect(() => {
-    const nodes = getNodes();
-    if (nodes && nodes.length > 0) {
-      const converted = JSON.stringify(nodes);
-      localStorage.setItem("Json", converted);
-    }
-  }, [getNodes]);
+  // useEffect(() => {
+  //   const nodes = getNodes();
+  //   if (nodes && nodes.length > 0) {
+  //     const converted = JSON.stringify(nodes);
+  //     // localStorage.setItem("Json", converted);
+  //   }
+  // }, [getNodes]);
 
   return (
     <Fragment>
@@ -104,11 +104,19 @@ function ERNodes({ id, data }) {
         {isSettting && (
           <NodeToolbar>
             <ColorPickerModel setBgColorNode={setBgColorNode} />
-            <AddItemsModal items={items} setItems={setItems} node={{ id, data }} title={title} />
+            <AddItemsModal
+              items={items}
+              setItems={setItems}
+              node={{ id, data }}
+              title={title}
+            />
           </NodeToolbar>
         )}
         <div className="bg-erbg inline-block rounded-lg p-0.5">
-          <div className="w-32 rounded-lg pb-2" style={{ background: bgColorNode ? bgColorNode : "#061044" }}>
+          <div
+            className="w-32 rounded-lg pb-2"
+            style={{ background: bgColorNode ? bgColorNode : "#061044" }}
+          >
             <div className="flex justify-between bg-erlabelbg rounded-t-lg px-1 py-1 border-b border-outerborderBlue h-auto">
               <div className="text-8 text-white w-3/4">
                 {isEditingTitle ? (
@@ -154,7 +162,7 @@ function ERNodes({ id, data }) {
             </div>
             <div className="py-1 relative">
               <div className="handles targets">
-                {data.targetHandles.map((handle) => (
+                {data?.targetHandles?.map((handle) => (
                   <Handle
                     key={handle.id}
                     id={handle.id}
@@ -168,8 +176,11 @@ function ERNodes({ id, data }) {
                   />
                 ))}
               </div>
-              {items.map((item) => (
-                <div key={item.id} className="text-white px-2 text-xs flex justify-between">
+              {items?.map((item) => (
+                <div
+                  key={item.id}
+                  className="text-white px-2 text-xs flex justify-between"
+                >
                   <div className="flex text-7">
                     <TiArrowRightThick className="w-2.5 h-2.5 shadow-arrowsh bg-arrowbg text-arrowcolor px-0.5 py-0.5 text-7 rounded mr-1 mt-1" />
                     {item.label}
@@ -186,7 +197,7 @@ function ERNodes({ id, data }) {
                 </div>
               ))}
               <div className="handles sources">
-                {data.sourceHandles.map((handle) => (
+                {data?.sourceHandles?.map((handle) => (
                   <Handle
                     key={handle.id}
                     id={handle.id}

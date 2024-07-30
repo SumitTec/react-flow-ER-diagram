@@ -1,21 +1,43 @@
 import React, { useState } from "react";
+import { getId } from ".";
+import { useReactFlow } from "reactflow";
 
 export default ({ addNode }) => {
   const [isshow, setisshow] = useState(false);
 
+  const { screenToFlowPosition } = useReactFlow();
   const toggleShow = () => {
     setisshow(!isshow);
   };
 
   const handleNodeClick = (event, nodeType) => {
-    event.stopPropagation();
-    const position = { x: 250, y: 5 }; // default position
+    // console.log("nodeType", nodeType);
+    // event.stopPropagation();
+    // const position = { x: 250, y: 5 }; // default position
+    // const newNode = {
+    //   id: `dndnode_${Date.now()}`,
+    //   type: nodeType,
+    //   position,
+    //   data: { label: `${nodeType} node` },
+    // };
+
+    // const type = event.dataTransfer.getData("application/reactflow");
+
+    if (typeof nodeType === "undefined" || !nodeType) {
+      return;
+    }
+
+    const position = screenToFlowPosition({
+      x: event.clientX,
+      y: event.clientY,
+    });
     const newNode = {
       id: `dndnode_${Date.now()}`,
       type: nodeType,
       position,
       data: { label: `${nodeType} node` },
     };
+
     addNode(newNode);
   };
 

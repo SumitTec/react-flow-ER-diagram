@@ -5,15 +5,9 @@ export const initialNodes = [
     position: { x: 14.3, y: 108.7 },
     data: {
       label: "order_status",
-      sourceHandles: [
-        { id: "1-source-status VARCHAR", position: 40 }
-      ],
-      targetHandles: [
-        { id: "1-target-status VARCHAR", position: 40 }
-      ],
-      items: [
-        { id: 1, label: "status VARCHAR", type: "10" }
-      ],
+      sourceHandles: [{ id: "1-source-status VARCHAR", position: 40 }],
+      targetHandles: [{ id: "1-target-status VARCHAR", position: 40 }],
+      items: [{ id: 1, label: "status VARCHAR", type: "10" }],
     },
   },
   {

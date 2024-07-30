@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Panel,
-  useReactFlow,
-  getNodesBounds,
-  getViewportForBounds,
-} from "reactflow";
+import { useReactFlow, getNodesBounds, getViewportForBounds } from "reactflow";
 import { toPng } from "html-to-image";
 
 function downloadImage(dataUrl) {
@@ -46,14 +41,12 @@ function DownloadButton() {
   };
 
   return (
-    <Panel position="top-right">
-      <button
-        className="w-full h-full text-xs text-white bg-green-500 p-2 rounded "
-        onClick={onClick}
-      >
-        Download Image
-      </button>
-    </Panel>
+    <button
+      className="w-30 h-full text-xs text-white bg-green-500 p-2 rounded "
+      onClick={onClick}
+    >
+      Download Image
+    </button>
   );
 }
 

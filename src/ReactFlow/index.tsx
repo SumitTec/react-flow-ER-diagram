@@ -7,6 +7,7 @@ import ReactFlow, {
   Controls,
   useReactFlow,
   Node,
+  Panel,
 } from "reactflow";
 import "reactflow/dist/style.css";
 import { initialNodes } from "./node-edges";
@@ -19,12 +20,12 @@ const nodeTypes = {
 };
 
 let id = 0;
-const getId = () => `dndnode_${id++}`;
+export const getId = () => `dndnode_${id++}`;
 
 const suppressResizeObserverError = () => {
   const originalError = console.error;
   console.error = (...args) => {
-    if (args[0].includes('ResizeObserver loop limit exceeded')) {
+    if (args[0].includes("ResizeObserver loop limit exceeded")) {
       return;
     }
     originalError.apply(console, args);
@@ -35,7 +36,7 @@ const DnDFlow = () => {
   const reactFlowWrapper = useRef(null);
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-  const { screenToFlowPosition } = useReactFlow();
+  const { screenToFlowPosition, getNodes } = useReactFlow();
   const [isShowData, setIsShowData] = useState(true);
 
   useEffect(() => {
@@ -44,7 +45,7 @@ const DnDFlow = () => {
 
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
-    []
+    [setEdges]
   );
 
   const onDragOver = useCallback((event) => {
@@ -66,7 +67,7 @@ const DnDFlow = () => {
         x: event.clientX,
         y: event.clientY,
       });
-      const newNode: any = {
+      const newNode: Node = {
         id: getId(),
         type,
         position,
@@ -75,51 +76,65 @@ const DnDFlow = () => {
 
       setNodes((nds) => nds.concat(newNode));
     },
-    [screenToFlowPosition]
+    [screenToFlowPosition, setNodes]
   );
 
-  const addNode = (newNode: ConcatArray<Node<any, string | undefined>>) => {
+  const addNode = (newNode: Node) => {
+    console.log("newNode", newNode);
     setNodes((nds) => nds.concat(newNode));
   };
 
   const toggleShowData = () => {
+    console.log("Toggel");
+
     if (!isShowData) {
       setNodes([]);
+      setIsShowData(true);
     } else {
+      setIsShowData(false);
       setNodes(initialNodes);
     }
-    setIsShowData(false)
   };
+  console.log("GetNOde", getNodes());
+  console.log("setIsShowData", isShowData);
+  console.log("Nodes", nodes);
 
   return (
-    <div className="dndflow">
-      <Sidebar addNode={addNode} />
-      <div className="reactflow-wrapper" ref={reactFlowWrapper}>
-        <ReactFlow
-          nodes={nodes}
-          edges={edges}
-          onNodesChange={onNodesChange}
-          onEdgesChange={onEdgesChange}
-          onConnect={onConnect}
-          onDrop={onDrop}
-          onDragOver={onDragOver}
-          nodeTypes={nodeTypes}
-          fitView
-        >
-          <Controls />
-        </ReactFlow>
+    <>
+      <div className="dndflow">
+        <Sidebar addNode={addNode} />
+        <div className="reactflow-wrapper" ref={reactFlowWrapper}>
+          <ReactFlow
+            nodes={nodes}
+            edges={edges}
+            onNodesChange={onNodesChange}
+            onEdgesChange={onEdgesChange}
+            onConnect={onConnect}
+            onDrop={onDrop}
+            onDragOver={onDragOver}
+            nodeTypes={nodeTypes}
+            fitView
+          >
+            <Controls />
+          </ReactFlow>
+        </div>
       </div>
-      {isShowData && <button onClick={toggleShowData} className="w-30 p-2 h-8 text-xs text-white bg-green-500 p-2 rounded mr-20 mt-20">
-        Show Sample Data
-      </button>}
-    </div>
+      <Panel position="top-right">
+        <button
+          className="w-30 h-8 text-xs text-white bg-green-500 p-2 pr-3 rounded mr-3 "
+          onClick={toggleShowData}
+        >
+          {!isShowData ? "Hide Sample Data" : "Show Sample Data"}
+        </button>
+        <DownloadButton />
+      </Panel>
+    </>
   );
 };
 
 const ReactFlows = () => (
   <ReactFlowProvider>
     <DnDFlow />
-    <DownloadButton />
   </ReactFlowProvider>
 );
 
