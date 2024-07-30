@@ -10,7 +10,7 @@ import ReactFlow, {
   Panel,
 } from "reactflow";
 import "reactflow/dist/style.css";
-import { initialNodes } from "./node-edges";
+import { initialEdges, initialNodes } from "./node-edges";
 import DownloadButton from "./DownloadImage";
 import Sidebar from "./Sidebar";
 import ERNodes from "./Nodes/ERNode";
@@ -36,7 +36,7 @@ const DnDFlow = () => {
   const reactFlowWrapper = useRef(null);
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-  const { screenToFlowPosition, getNodes } = useReactFlow();
+  const { screenToFlowPosition, getNodes, getEdges } = useReactFlow();
   const [isShowData, setIsShowData] = useState(true);
 
   useEffect(() => {
@@ -80,12 +80,12 @@ const DnDFlow = () => {
   );
 
   const addNode = (newNode: Node) => {
-    console.log("newNode", newNode);
+    // console.log("newNode", newNode);
     setNodes((nds) => nds.concat(newNode));
   };
 
   const toggleShowData = () => {
-    console.log("Toggel");
+    // console.log("Toggel");
 
     if (!isShowData) {
       setNodes([]);
@@ -93,11 +93,13 @@ const DnDFlow = () => {
     } else {
       setIsShowData(false);
       setNodes(initialNodes);
+      setEdges(initialEdges);
     }
   };
-  console.log("GetNOde", getNodes());
-  console.log("setIsShowData", isShowData);
-  console.log("Nodes", nodes);
+  // console.log("GetNOde", getNodes());
+  // console.log("setIsShowData", isShowData);
+  // console.log("Nodes", nodes);
+  console.log("Edges", getEdges());
 
   return (
     <>
